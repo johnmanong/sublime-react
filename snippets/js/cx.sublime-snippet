@@ -1,10 +1,10 @@
 <snippet>
     <content><![CDATA[
-cx({
+classNames({
 	$1: $2
 });
 ]]></content>
     <tabTrigger>cx</tabTrigger>
     <scope>source.js</scope>
-    <description>React: cx({ ... })</description>
+    <description>React: classNames({ ... })</description>
 </snippet>

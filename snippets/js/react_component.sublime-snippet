@@ -1,14 +1,14 @@
 <snippet>
     <content><![CDATA[
-var React = require('react');
+import React from 'react';
 
-var ${1:${TM_FILENAME/(.?\w*)(?:\.\w+)*$/$1/g}} = React.createClass({
+const ${1:${TM_FILENAME/(.?\w*)(?:\.\w+)*$/$1/g}} = React.createClass({
 
-	render: function() {
+	render() {
 		return (
 			${0:<div />}
 		);
-	}
+	},
 
 });
 

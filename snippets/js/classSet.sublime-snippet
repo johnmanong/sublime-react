@@ -1,6 +1,6 @@
 <snippet>
     <content><![CDATA[
-var cx = React.addons.classSet;
+import classNames from 'classNames';
 ]]></content>
     <tabTrigger>cs</tabTrigger>
     <scope>source.js</scope>

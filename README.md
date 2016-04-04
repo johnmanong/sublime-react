@@ -1,4 +1,4 @@
-# sublime-react
+# sublime-react (Oscar Fork)
 
 Snippets for ReactJS. This package used to provide JSX syntax highlighting and has been DEPRECATED in favor of [babel/babel-sublime](https://github.com/babel/babel-sublime).
 
@@ -53,9 +53,9 @@ Snippets are available for both JSX and CJSX ([React CoffeeScript](https://githu
 
     fup→  forceUpdate(...)
 
-    gdp→  getDefaultProps: fn() { return {...} } 
+    gdp→  getDefaultProps: fn() { return {...} }
 
-    gis→  getInitialState: fn() { return {...} } 
+    gis→  getInitialState: fn() { return {...} }
 
     ism→  isMounted()
 

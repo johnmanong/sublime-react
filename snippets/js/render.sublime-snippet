@@ -1,10 +1,10 @@
 <snippet>
     <content><![CDATA[
-render: function() {
+render() {
 	return (
 		${1:<div />}
 	);
-}
+},
 ]]></content>
     <tabTrigger>ren</tabTrigger>
     <scope>source.js</scope>
