@@ -1,4 +1,4 @@
-# sublime-react
+# sublime-react-oscar
 
 Snippets for ReactJS. This package used to provide JSX syntax highlighting and has been DEPRECATED in favor of babel/babel-sublime.
 

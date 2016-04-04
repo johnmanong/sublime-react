@@ -2,7 +2,7 @@ var fs = require('fs');
 var async = require('async');
 
 var DOCUMENTATION_TOP =
-  '# sublime-react\n\n' +
+  '# sublime-react-oscar\n\n' +
   'Snippets for ReactJS. This package used to provide JSX syntax highlighting and has been DEPRECATED in favor of babel/babel-sublime.\n\n' +
   '![alt tag](https://raw.github.com/jgebhardt/sublime-react/master/docs/img/sr-rcc-out.gif)\n\n' +
   '## Installation\n\n' +
