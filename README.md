@@ -12,9 +12,13 @@ You will need the Sublime [Package Manager](https://sublime.wbond.net/installati
 
 - Open the command palette: `⌘+shift+p` on MacOS/Linux, `ctrl+shift+p` on Windows
 
+- type `pc add repo`, select `Package Control: Add Repository`
+
+- add repo `https://github.com/johnmanong/sublime-react/`
+
 - type `install`, select `Package Control: Install Package`
 
-- type `React`, select `ReactJS`
+- type `sublime-react`, select `sublime-react`
 
 ## Usage
 

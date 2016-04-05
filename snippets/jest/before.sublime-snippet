@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+before${1:Each}(() => {
+	${3:}
+});
+]]></content>
+	<tabTrigger>befr</tabTrigger>
+	<scope>source.js</scope>
+  <description>beforeEach(fn(){ ... })</description>
+</snippet>
