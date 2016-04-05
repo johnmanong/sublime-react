@@ -8,5 +8,5 @@ getInitialState() {
 ]]></content>
     <tabTrigger>gis</tabTrigger>
     <scope>source.js</scope>
-    <description>React: getInitialState: fn() { return {...} } </description>
+    <description>React: getInitialState: fn() { return {...} }</description>
 </snippet>

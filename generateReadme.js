@@ -1,6 +1,11 @@
 var fs = require('fs');
 var async = require('async');
 
+DIR_TO_HEADER_MAP = {
+  'js': '#### Documentation of available snippets (JSX):\n\n',
+  'jest': '#### Documentation of available snippets (Jest):\n\n',
+};
+
 var DOCUMENTATION_TOP =
   '# sublime-react-oscar\n\n' +
   'Snippets for ReactJS. This package used to provide JSX syntax highlighting and has been DEPRECATED in favor of babel/babel-sublime.\n\n' +
@@ -18,7 +23,6 @@ var DOCUMENTATION_TOP =
   'It\'s easy! Simply activate snippets by typing a mnemonic followed by TAB.\n\n' +
   '![alt tag](https://raw.github.com/jgebhardt/sublime-react/master/docs/img/sr-snippets-out.gif)\n\n' +
   'Snippets are available for both JSX and CJSX ([React CoffeeScript](https://github.com/jsdf/coffee-react-transform)).\n\n' +
-  '#### Documentation of available snippets (JSX):\n\n' +
   '```\n';
 
 var DOCUMENTATION_BOTTOM =
@@ -30,30 +34,14 @@ var DOCUMENTATION_BOTTOM =
   'Contributions are very welcome, but we ask that you please fill out our ' +
   '[CLA](https://code.facebook.com/cla) in order for us to accept your pull request.\n\n';
 
-fs.readdir('./snippets/js', function(err, files) {
-  var snippets = files.filter(function(file) {
-    return file.substr(-16) === '.sublime-snippet';
-  }).map(function(file) {
-    return './snippets/js/' + file;
-  });
-  async.map(snippets, readAndInspect, function(err, results) {
-    if (err) {
-      console.error('error mapping snippets', err);
-    }
-    var snippetDocs =
-      DOCUMENTATION_TOP +
-      results.map(function(snippet) {
-        return inspectFile(snippet);
-      }).sort(function(a, b) {
-        return a.abbreviation > b.abbreviation
-          ? 1
-          : a.abbreviation === b.abbreviation
-            ? 0
-            : -1;
-      }).map(function(snippet) {
-        return snippet.docBlock;
-      }).join('') +
-      DOCUMENTATION_BOTTOM;
+
+fs.readdir('./snippets/', function(err, dirs) {
+  async.map(dirs, unpackDirs, (err, results) => {
+    // flatten
+    var snippets = [].concat.apply([], results);
+    var snippetsText = snippets.join('');
+
+    var snippetDocs = DOCUMENTATION_TOP + snippetsText + DOCUMENTATION_BOTTOM;
     fs.writeFile('README.md', snippetDocs, function (err) {
       if (err) {
         console.error('error appending README:', err);
@@ -61,6 +49,47 @@ fs.readdir('./snippets/js', function(err, files) {
     });
   });
 });
+
+function filesToCopyText(header, fps) {
+  // take a list who's first item is the header and rest are fps to snippets
+  var snippetTexts = fps.map(function(snippet) {
+    return inspectFile(snippet);
+  }).sort(function(a, b) {
+    return a.abbreviation > b.abbreviation
+    ? 1
+    : a.abbreviation === b.abbreviation
+    ? 0
+    : -1;
+  }).map(function(snippet) {
+    return snippet.docBlock;
+  });
+
+  // return list of snippets with section header as first
+  return [header].concat(snippetTexts).join('');
+}
+
+
+
+function unpackDirs(dir, cb) {
+
+  fs.readdir(`./snippets/${dir}`, (err, files) => {
+    // first item is always the header
+    var snippets = files.filter(function(file) {
+      return file.substr(-16) === '.sublime-snippet';
+    }).map(function(file) {
+      return `./snippets/${dir}/` + file;
+    });
+
+    async.map(snippets, readAndInspect, function(err, results) {
+      if (err) {
+        console.error('error mapping snippets', err);
+      }
+
+      var snippetsText = filesToCopyText(DIR_TO_HEADER_MAP[dir], results);
+      cb(null, snippetsText);
+    });
+  });
+};
 
 function readAndInspect(fileName, cb) {
   fs.readFile(fileName, 'utf-8', function(err, contents) {
@@ -83,6 +112,7 @@ function inspectFile(contents) {
     var shortCut = '     '.substring(0, 5 - abbreviation.length) + abbreviation;
     docBlock = '  ' + shortCut + '→  ' + description + '\n\n';
   }
+
   return {
     docBlock: docBlock,
     abbreviation: abbreviation,

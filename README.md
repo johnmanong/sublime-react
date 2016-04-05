@@ -30,9 +30,19 @@ It's easy! Simply activate snippets by typing a mnemonic followed by TAB.
 
 Snippets are available for both JSX and CJSX ([React CoffeeScript](https://github.com/jsdf/coffee-react-transform)).
 
+```
+#### Documentation of available snippets (Jest):
+
+   aftr→  afterEach(fn(){ ... })
+
+   befr→  beforeEach(fn(){ ... })
+
+   desc→  describe(fn(){ ... })
+
+     it→  it(fn() { ... })
+
 #### Documentation of available snippets (JSX):
 
-```
     cdm→  componentDidMount: fn() { ... }
 
    cdup→  componentDidUpdate: fn(pp, ps) { ... }
@@ -51,9 +61,9 @@ Snippets are available for both JSX and CJSX ([React CoffeeScript](https://githu
 
     fup→  forceUpdate(...)
 
-    gdp→  getDefaultProps: fn() { return {...} } 
+    gdp→  getDefaultProps: fn() { return {...} }
 
-    gis→  getInitialState: fn() { return {...} } 
+    gis→  getInitialState: fn() { return {...} }
 
     ism→  isMounted()
 
